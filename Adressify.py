@@ -148,6 +148,7 @@ if pressed:
     CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
     options = webdriver.ChromeOptions()
+    options.set_capability("browserVersion", "85.0.4183.83")
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("--disable-gpu")
