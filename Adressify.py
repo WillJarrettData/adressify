@@ -16,7 +16,6 @@ import time
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -145,13 +144,19 @@ if pressed:
     status_text.text('Grabbing building records...')
 
     #set driver options (to hide the new chrome tab)
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("disable-gpu")
+    options.add_argument("no-sandbox")
+
+    options.binary_location = GOOGLE_CHROME_PATH
 
     #launch driver
-    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
     #send driver to building records website
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
@@ -226,7 +231,7 @@ if pressed:
         print("Oh dear, that seems to have broken.")
 
     #launch webdriver
-    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
     driver.get(url)
