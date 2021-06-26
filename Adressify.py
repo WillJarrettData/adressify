@@ -148,7 +148,6 @@ if pressed:
     CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
     options = webdriver.ChromeOptions()
-    options.set_capability("browserVersion", "85.0.4183.83")
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("--disable-gpu")
@@ -157,8 +156,7 @@ if pressed:
     options.binary_location = GOOGLE_CHROME_PATH
 
     #launch driver
-    #ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, 
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
     #send driver to building records website
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
@@ -233,8 +231,7 @@ if pressed:
         print("Oh dear, that seems to have broken.")
 
     #launch webdriver
-    #ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, 
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
     driver.get(url)
