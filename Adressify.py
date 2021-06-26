@@ -157,7 +157,8 @@ if pressed:
     options.binary_location = GOOGLE_CHROME_PATH
 
     #launch driver
-    driver = webdriver.Chrome(ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+    #ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, 
+    driver = webdriver.Chrome(chrome_options=options)
     #send driver to building records website
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
@@ -232,7 +233,8 @@ if pressed:
         print("Oh dear, that seems to have broken.")
 
     #launch webdriver
-    driver = webdriver.Chrome(ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+    #ChromeDriverManager().install(), execution_path=CHROMEDRIVER_PATH, 
+    driver = webdriver.Chrome(chrome_options=options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
     driver.get(url)
