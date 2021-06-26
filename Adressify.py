@@ -144,19 +144,15 @@ if pressed:
     status_text.text('Grabbing building records...')
 
     #set driver options (to hide the new chrome tab)
-    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
 
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x1080')
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-
-    options.binary_location = GOOGLE_CHROME_PATH
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
     #launch driver
-    driver = webdriver.Chrome(ChromeDriverManager(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     #send driver to building records website
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
@@ -231,7 +227,7 @@ if pressed:
         print("Oh dear, that seems to have broken.")
 
     #launch webdriver
-    driver = webdriver.Chrome(ChromeDriverManager(), execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
     driver.get(url)
