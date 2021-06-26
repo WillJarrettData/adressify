@@ -337,7 +337,7 @@ if pressed:
         ###
 
         dfMap = df[["latitude", "longitude"]]
-        st.map(dfMap, zoom=12)
+        st.map(dfMap, zoom=11)
 
     except:
         #error message to display if anything above breaks
