@@ -122,7 +122,7 @@ if pressed:
     lat = result_dic['results'][0]['geometry']['location']['lat']
     lng = result_dic['results'][0]['geometry']['location']['lng']
                 
-    #put everything in a dictionary
+    #put everything in a dictionary 
     address_dict = {
         'address': address,
         'street_number': street_number,
