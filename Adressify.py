@@ -150,7 +150,7 @@ if pressed:
     options.add_argument("disable-gpu")
 
     #launch driver
-    driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), chrome_options=options)
     #send driver to building records website
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
@@ -225,7 +225,7 @@ if pressed:
         print("Oh dear, that seems to have broken.")
 
     #launch webdriver
-    driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), chrome_options=options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
     driver.get(url)
