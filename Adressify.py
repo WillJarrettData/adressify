@@ -133,6 +133,12 @@ if pressed:
     progress_bar.progress(35)
     status_text.text('Grabbing building records...')
 
+    #Set headers
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' \
+        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36'
+    }
+
     #set driver options (to hide the new chrome tab)
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -144,7 +150,7 @@ if pressed:
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
     #send driver to building records website 
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
-    driver.get(url)
+    driver.get(url, headers=headers)
     
     #wait until the page loads
     try:
@@ -222,7 +228,7 @@ if pressed:
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
     #send driver to finance website
     url = "https://a836-pts-access.nyc.gov/care/search/commonsearch.aspx?mode=persprop"
-    driver.get(url)
+    driver.get(url, headers=headers)
     #accept terms + conditions
     button = driver.find_element_by_id("btAgree")
     button.click()
