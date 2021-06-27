@@ -286,7 +286,7 @@ if pressed:
     for zipcode in result_dic:
         if zipcode['modzcta'] == _zip:
             zip_pop = zipcode['pop_est']
-    zip_pop = "{:,}".format(zip_pop)
+    zip_pop = "{:,}".format(int(zip_pop))
 
     ###
     ### Collate and print everything useful
