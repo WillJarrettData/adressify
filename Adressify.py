@@ -148,6 +148,8 @@ if pressed:
     driver.get(url)
     
     #wait until the page loads
+    time.sleep(3)
+
     try:
         element = WebDriverWait(driver, 15).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
