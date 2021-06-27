@@ -149,40 +149,36 @@ if pressed:
     
     #wait until the page loads
     try:
-        element = WebDriverWait(driver, 25).until(
+        element = WebDriverWait(driver, 15).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
     except:
         pass
 
     try:
-        element = WebDriverWait(driver, 25).until(
+        element = WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.ID, "housenumber"))
         )
     except:
         pass
 
     #input street number
-    street_number_input = driver.find_element_by_id("housenumber")
-    street_number_input.send_keys(address_dict["street_number"])
+    street_number_input = driver.find_element_by_id('housenumber')
+    street_number_input.send_keys(address_dict['street_number'])
     #input street name
-    street_name_input = driver.find_element_by_id("streetnumber")
-    street_name_input.send_keys(address_dict["street_name"])
+    street_name_input = driver.find_element_by_id('streetnumber')
+    street_name_input.send_keys(address_dict['street_name'])
     #input borough
-    select = Select(driver.find_element_by_id("sel1"))
-    select.select_by_visible_text(address_dict["county"])
-
+    select = Select(driver.find_element_by_id('sel1'))
+    select.select_by_visible_text(address_dict['county'])
     #click search
-    button = driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")
+    button = driver.find_elements_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")[0]
     button.click()
 
-    #wait until the page loads
-    try:
-        element = WebDriverWait(driver, 25).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
-            )
-    except:
-        pass
+    #wait until page loads
+    element = WebDriverWait(driver, 100).until(
+            EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
+        )
 
     #grab results
     BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
