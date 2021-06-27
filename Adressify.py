@@ -181,13 +181,13 @@ if pressed:
     #wait until the page loads
     try:
         element = WebDriverWait(driver, 100).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div/span[3]"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".pad-15.ng-binding"))
             )
     except:
         pass
 
     #grab results
-    BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','').strip()
+    BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
     record_url = f"http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?bin={BIN}"
     block = driver.find_elements_by_class_name('form-group')[3].text.replace('Tax Block\n','')
     lot = driver.find_elements_by_class_name('form-group')[4].text.replace('Tax Lot\n','')
