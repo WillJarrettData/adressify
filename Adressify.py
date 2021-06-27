@@ -187,7 +187,7 @@ if pressed:
         pass
 
     #grab results
-    BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
+    BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','').strip()
     record_url = f"http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?bin={BIN}"
     block = driver.find_elements_by_class_name('form-group')[3].text.replace('Tax Block\n','')
     lot = driver.find_elements_by_class_name('form-group')[4].text.replace('Tax Lot\n','')
