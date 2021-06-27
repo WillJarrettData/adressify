@@ -24,7 +24,7 @@ from selenium.webdriver.support import expected_conditions as EC
 pd.set_option('display.max_columns', None)
 
 ###
-### Set up page
+### Set up page 
 ###
 
 #remove padding
