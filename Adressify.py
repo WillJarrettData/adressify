@@ -143,11 +143,11 @@ if pressed:
 
     #launch driver
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
-    #send driver to building records website
+    #send driver to building records website 
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
     
-    #wait until the page loads
+    #wait until the page loads 
     element = WebDriverWait(driver, 100).until(EC.invisibility_of_element_located((By.ID, "veil")))
 
     element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.ID, "housenumber")))
