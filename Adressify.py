@@ -44,7 +44,6 @@ st.title('Enter a New York City address')
 #these are the columns
 left_column, right_column = st.beta_columns([6,1])
 address = left_column.text_input("")
-address = address + " new york"
 #this is the button
 right_column.text('')
 right_column.text('')
