@@ -286,6 +286,7 @@ if pressed:
     for zipcode in result_dic:
         if zipcode['modzcta'] == _zip:
             zip_pop = zipcode['pop_est']
+    zip_pop = "{:,}".format(zip_pop)
 
     ###
     ### Collate and print everything useful
@@ -361,7 +362,7 @@ if pressed:
     ### Print zipcode details
     ###
 
-    st.write(f"**Zip code ({_zip}) population**: {address_dict['zip_pop']:,}")
+    st.write(f"**Zip code ({_zip}) population**: {address_dict['zip_pop']}")
 
 #    except:
 #        #error message to display if anything above breaks
