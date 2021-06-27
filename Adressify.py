@@ -274,6 +274,23 @@ if pressed:
 
         driver.quit()
 
+        ###
+        ### Grab zip code data
+        ###
+
+        #set url
+        url = 'https://data.cityofnewyork.us/resource/pri4-ifjk.json'
+        r = requests.get(url)
+        result_dic = r.json()
+
+        for zipcode in result_dic:
+            if zipcode['modzcta'] == _zip:
+                zip_pop = zipcode['pop_est']
+
+        ###
+        ### Collate and print everything useful
+        ###
+
         #define 'any_flood_risk' variable
         if tidal_wetlands == "No" and freshwater_wetlands == "No" and coastal_erosion == "No" and special_flood_hazard == "No":
             any_flood_risk = "No"
@@ -312,7 +329,8 @@ if pressed:
             'owner': owner,
             'land_area_sqft': land_area_sqft,
             'land_area_acres': land_area_acres,
-            'estimated_market_value': estimated_market_value
+            'estimated_market_value': estimated_market_value,
+            'zip_pop': zip_pop
             }
 
         #save as a big lovely dataframe
@@ -338,6 +356,12 @@ if pressed:
 
         dfMap = df[["latitude", "longitude"]]
         st.map(dfMap, zoom=11)
+
+        ###
+        ### Print zipcode details
+        ###
+
+        st.write(f"**Zip code ({_zip}) population**: {address_dict['zip_pop']:,}")
 
     except:
         #error message to display if anything above breaks
