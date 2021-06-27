@@ -147,19 +147,27 @@ if pressed:
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
     
-    #wait until the page loads 
-    element = WebDriverWait(driver, 100).until(EC.invisibility_of_element_located((By.ID, "veil")))
+    #wait until the page loads
+    try:
+        element = WebDriverWait(driver, 15).until(
+            EC.invisibility_of_element_located((By.ID, "veil"))
+        )
+    except:
+        pass
 
-    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.ID, "housenumber")))
+    try:
+        element = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.ID, "housenumber"))
+        )
+    except:
+        pass
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
     street_number_input.send_keys(address_dict['street_number'])
-
     #input street name
     street_name_input = driver.find_element_by_id('streetnumber')
     street_name_input.send_keys(address_dict['street_name'])
-
     #input borough
     select = Select(driver.find_element_by_id('sel1'))
     select.select_by_visible_text(address_dict['county'])
@@ -169,7 +177,12 @@ if pressed:
     button.click()
 
     #wait until the page loads
-    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div/span[3]")))
+    try:
+        element = WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
+            )
+    except:
+        pass
 
     #grab results
     BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
@@ -244,7 +257,7 @@ if pressed:
 
     #waiting for page to load
     try:
-        element = WebDriverWait(driver, 100).until(
+        element = WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
             )
     except:
@@ -261,7 +274,7 @@ if pressed:
 
     #waiting for page to load
     try:
-        element = WebDriverWait(driver, 100).until(
+        element = WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
             )
     except:
