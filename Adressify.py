@@ -365,7 +365,7 @@ if pressed:
         st.write(f"**Land area (acres)**: {address_dict['land_area_acres']}")
         st.write(f"**Any flood risk**: {address_dict['any_flood_risk']}")
         st.write(f"**Coordinates**: {address_dict['longitude']}, {address_dict['latitude']}")
-        st.write(f"**Building record URL**: [Click here for details]({address_dict['record_url']})")
+        st.write(f"**Building record**: [Click here for details]({address_dict['record_url']})")
         st.write(f"**Recent tax record**: [Click here for details]({address_dict['recent_tax']})")
 
         ###
