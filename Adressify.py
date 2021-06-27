@@ -389,10 +389,8 @@ if pressed:
     ### Print zipcode details
     ###
 
-
-    st.write(f"**ZIP CODE ({_zip}) DETAILS:**")
-    st.write(f"**Population**: {address_dict['zip_pop']}")
-    st.write(f"**Household broadband adoption**: {address_dict['zip_internet']}%")
+    st.write(f"**Zip code population**: {address_dict['zip_pop']}")
+    st.write(f"**Zip code broadband adoption**: {address_dict['zip_internet']}%")
 
 #    except:
 #        #error message to display if anything above breaks
