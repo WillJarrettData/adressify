@@ -181,7 +181,7 @@ if pressed:
     #wait until the page loads
     try:
         element = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div/span[3]"))
             )
     except:
         pass
