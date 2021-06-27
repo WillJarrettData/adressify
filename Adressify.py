@@ -154,6 +154,13 @@ if pressed:
         )
     except:
         pass
+    
+    try:
+        element = WebDriverWait(driver, 100).until(
+            EC.visibilityOfElementLocated((By.ID, "housenumber"))
+        )
+    except:
+        pass
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
