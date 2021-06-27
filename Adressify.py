@@ -175,7 +175,7 @@ if pressed:
     select.select_by_visible_text(address_dict['county'])
 
     #click search
-    button = driver.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")
+    button = driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")
     button.click()
 
     #wait until the page loads
