@@ -288,6 +288,15 @@ if pressed:
             zip_pop = zipcode['pop_est']
     zip_pop = "{:,}".format(int(zip_pop))
 
+    #set url
+    url = 'https://data.cityofnewyork.us/resource/qz5f-yx82.json'
+    r = requests.get(url)
+    result_dic = r.json()
+
+    for zipcode in result_dic:
+        if zipcode['zip_code'] == _zip:
+            zip_internet = round(float(zipcode['home_broadband_adoption'])*100,1)
+    zip_internet = str(zip_internet)
     ###
     ### Collate and print everything useful
     ###
@@ -331,7 +340,8 @@ if pressed:
         'land_area_sqft': land_area_sqft,
         'land_area_acres': land_area_acres,
         'estimated_market_value': estimated_market_value,
-        'zip_pop': zip_pop
+        'zip_pop': zip_pop,
+        'zip_internet': zip_internet
         }
 
     #save as a big lovely dataframe
@@ -362,7 +372,10 @@ if pressed:
     ### Print zipcode details
     ###
 
-    st.write(f"**Zip code ({_zip}) population**: {address_dict['zip_pop']}")
+
+    st.write(f"**ZIP CODE ({_zip}) DETAILS:**")
+    st.write(f"**Population**: {address_dict['zip_pop']}")
+    st.write(f"**Household broadband adoption**: {address_dict['zip_internet']}%")
 
 #    except:
 #        #error message to display if anything above breaks
