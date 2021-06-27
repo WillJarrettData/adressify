@@ -148,19 +148,9 @@ if pressed:
     driver.get(url)
     
     #wait until the page loads
-    try:
-        element = WebDriverWait(driver, 100).until(
-            EC.invisibility_of_element_located((By.ID, "veil"))
-        )
-    except:
-        pass
-    
-    try:
-        element = WebDriverWait(driver, 100).until(
-            EC.presence_of_element_located((By.ID, "housenumber"))
-        )
-    except:
-        pass
+    element = WebDriverWait(driver, 100).until(EC.invisibility_of_element_located((By.ID, "veil")))
+
+    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.ID, "housenumber")))
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
@@ -179,12 +169,7 @@ if pressed:
     button.click()
 
     #wait until the page loads
-    try:
-        element = WebDriverWait(driver, 100).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "pad-15"))
-            )
-    except:
-        pass
+    element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div/span[3]")))
 
     #grab results
     BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
