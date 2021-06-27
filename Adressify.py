@@ -156,13 +156,13 @@ if pressed:
         pass
 
     #input street number
-    street_number_input = driver.find_element_by_id('housenumber')
+    street_number_input = driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[1]/div/input')
     street_number_input.send_keys(address_dict['street_number'])
     #input street name
-    street_name_input = driver.find_element_by_id('streetnumber')
+    street_name_input = driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[2]/div/input')
     street_name_input.send_keys(address_dict['street_name'])
     #input borough
-    select = Select(driver.find_element_by_id('sel1'))
+    select = Select(driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[3]/div/select'))
     select.select_by_visible_text(address_dict['county'])
 
     #click search
