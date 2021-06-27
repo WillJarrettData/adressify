@@ -148,17 +148,15 @@ if pressed:
     driver.get(url)
     
     #wait until the page loads
-    time.sleep(3)
-
     try:
-        element = WebDriverWait(driver, 15).until(
+        element = WebDriverWait(driver, 25).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
     except:
         pass
 
     try:
-        element = WebDriverWait(driver, 15).until(
+        element = WebDriverWait(driver, 25).until(
             EC.presence_of_element_located((By.ID, "housenumber"))
         )
     except:
@@ -180,7 +178,7 @@ if pressed:
 
     #wait until the page loads
     try:
-        element = WebDriverWait(driver, 15).until(
+        element = WebDriverWait(driver, 25).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
             )
     except:
@@ -259,7 +257,7 @@ if pressed:
 
     #waiting for page to load
     try:
-        element = WebDriverWait(driver, 15).until(
+        element = WebDriverWait(driver, 25).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
             )
     except:
@@ -276,7 +274,7 @@ if pressed:
 
     #waiting for page to load
     try:
-        element = WebDriverWait(driver, 15).until(
+        element = WebDriverWait(driver, 25).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
             )
     except:
