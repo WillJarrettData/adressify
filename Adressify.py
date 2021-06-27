@@ -2,10 +2,6 @@
 ### Welcome to the fun address aggregator V0-3
 ###
 
-#to run this code yourself, you will need to install python and the libraries below
-#then type the following in the command line:
-#streamlit run "FILEPATH FOR PYTHON FILE HERE"
-
 #Import modules
 import pandas as pd
 import streamlit as st
@@ -59,7 +55,7 @@ pressed = right_column.button('Search')
 ###
 
 if pressed:
-#try:
+try:
     ###
     ### Ping google API with required address
     ###
@@ -73,12 +69,6 @@ if pressed:
     status_text.text('Pinging Google Geocoding API...')
 
     #set url and api key
-    #if you want to run this code yourself,
-    #you will need to change this to:
-    #api_key = "[NAME_OF_YOUR_API_HERE]"
-    #you can get an api key for yourself here: https://developers.google.com/maps/documentation/geocoding/get-api-key
-    #I have hidden my api key as an environmental variable so that I
-    #don't get charged for use if the code ends up in the wider world.
     api_key = os.environ.get('GOOGLE_GEO_API')
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
     keys = {'address': address, 'key': api_key}
@@ -149,7 +139,6 @@ if pressed:
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
     #launch driver
@@ -286,7 +275,7 @@ if pressed:
     
     #grab url
     recent_tax = driver.find_element_by_xpath("/html/body/div/div[3]/section/div/form/div[3]/div/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table[2]/tbody/tr[2]/td[3]/a").get_attribute('href')
-
+    
     driver.quit()
 
     ###
@@ -312,6 +301,7 @@ if pressed:
         if zipcode['zip_code'] == _zip:
             zip_internet = round(float(zipcode['home_broadband_adoption'])*100,1)
     zip_internet = str(zip_internet)
+
     ###
     ### Collate and print everything useful
     ###
@@ -392,10 +382,9 @@ if pressed:
     st.write(f"**Zip code population**: {address_dict['zip_pop']}")
     st.write(f"**Zip code broadband adoption**: {address_dict['zip_internet']}%")
 
-#    except:
-#        #error message to display if anything above breaks
-#        st.write("Hmm, that didn't work. Are you sure that was an NYC address?")
-#        #reset progress bar
-#        progress_bar.progress(0)
-#        status_text.text('')
-#        #
+    except:
+        #error message to display if anything above breaks
+        st.write("Hmm, that didn't work. Are you sure that was an NYC address?")
+        #reset progress bar
+        progress_bar.progress(0)
+        status_text.text('')
