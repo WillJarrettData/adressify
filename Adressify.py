@@ -120,8 +120,8 @@ if pressed:
         'neighborhood': neighborhood,
         'county': county,
         'zip': _zip,
-        'latitude': lat,
-        'longitude': lng
+        'latitude': latitude,
+        'longitude': longitude
     }
     df = pd.DataFrame([address_dict])
 
