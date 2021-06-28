@@ -147,19 +147,9 @@ if pressed:
     driver.get(url)
     
     #wait until the page loads
-    try:
-        element = WebDriverWait(driver, 15).until(
-            EC.invisibility_of_element_located((By.ID, "veil"))
-        )
-    except:
-        pass
-
-    try:
-        element = WebDriverWait(driver, 15).until(
-            EC.element_to_be_clickable((By.ID, "housenumber"))
-        )
-    except:
-        pass
+    element = WebDriverWait(driver, 15).until(
+        EC.invisibility_of_element_located((By.ID, "veil"))
+    )
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
