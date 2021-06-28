@@ -1,5 +1,5 @@
 ###
-### Welcome to the fun address aggregator V0-3
+### Welcome to the fun address aggregator V0-4
 ###
 
 #Import modules
@@ -49,14 +49,9 @@ right_column.text('')
 right_column.text('')
 pressed = right_column.button('Search')
 
-###
-### if button is pressed, do the below...
-###
-
 if pressed:
-#    try:
     ###
-    ### Ping google API with required address
+    ### Ping google API
     ###
 
     #create progress bar
@@ -109,21 +104,8 @@ if pressed:
         if i['types'][0] == "postal_code":
             _zip = i['long_name']
     #define coordinates
-    lat = result_dic['results'][0]['geometry']['location']['lat']
-    lng = result_dic['results'][0]['geometry']['location']['lng']
-                
-    #put everything in a dictionary 
-    address_dict = {
-        'address': address,
-        'street_number': street_number,
-        'street_name': street_name,
-        'neighborhood': neighborhood,
-        'county': county,
-        'zip': _zip,
-        'latitude': latitude,
-        'longitude': longitude
-    }
-    df = pd.DataFrame([address_dict])
+    latitude = result_dic['results'][0]['geometry']['location']['lat']
+    longitude = result_dic['results'][0]['geometry']['location']['lng']
 
     ###
     ### Grab building records with Selenium 
@@ -154,13 +136,13 @@ if pressed:
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
-    street_number_input.send_keys(address_dict['street_number'])
+    street_number_input.send_keys(street_number)
     #input street name
     street_name_input = driver.find_element_by_id('streetnumber')
-    street_name_input.send_keys(address_dict['street_name'])
+    street_name_input.send_keys(street_name)
     #input borough
     select = Select(driver.find_element_by_id('sel1'))
-    select.select_by_visible_text(address_dict['county'])
+    select.select_by_visible_text(county)
     #click search
     button = driver.find_elements_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")[0]
     button.click()
@@ -196,15 +178,15 @@ if pressed:
     progress_bar.progress(65)
     status_text.text('Grabbing financial records...')
 
-    if address_dict['county'] == "Manhattan":
+    if county == "Manhattan":
         borough_selector = "(1) Manhattan"
-    elif address_dict['county'] == "Bronx":
+    elif county == "Bronx":
         borough_selector = "(2) Bronx"
-    elif address_dict['county'] == "Brooklyn":
+    elif county == "Brooklyn":
         borough_selector = "(3) Brooklyn"
-    elif address_dict['county'] == "Queens":
+    elif county == "Queens":
         borough_selector = "(4) Queens"
-    elif address_dict['county'] == "Staten Island":
+    elif county == "Staten Island":
         borough_selector = "(5) Staten Island"
     else:
         print("Oh dear, that seems to have broken.")
@@ -280,7 +262,7 @@ if pressed:
     zip_pop = "{:,}".format(int(zip_pop))
 
     ###
-    ### Collate and print everything useful
+    ### Print everything useful
     ###
 
     #define 'any_flood_risk' variable
@@ -314,10 +296,3 @@ if pressed:
 
     dfMap = df[["latitude", "longitude"]]
     st.map(dfMap, zoom=11)
-
-#    except:
-#        #error message to display if anything above breaks
-#        st.write("Hmm, that didn't work. Are you sure that was an NYC address?")
-#        #reset progress bar
-#        progress_bar.progress(0)
-#        status_text.text('')
