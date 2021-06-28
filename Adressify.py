@@ -278,16 +278,6 @@ if pressed:
             zip_pop = zipcode['pop_est']
     zip_pop = "{:,}".format(int(zip_pop))
 
-    #set url
-    #url = 'https://data.cityofnewyork.us/resource/qz5f-yx82.json'
-    #r = requests.get(url)
-    #result_dic = r.json()
-
-    #for zipcode in result_dic:
-    #    if zipcode['zip_code'] == _zip:
-    #        zip_internet = round(float(zipcode['home_broadband_adoption'])*100,1)
-    #zip_internet = str(zip_internet)
-
     ###
     ### Collate and print everything useful
     ###
@@ -301,59 +291,21 @@ if pressed:
     #convert square feet into acres
     land_area_acres = round(int(land_area_sqft) / 43560, 3)
 
-    #stick everything in a dictionary
-    address_dict = {
-        'address': address,
-        'street_number': street_number,
-        'street_name': street_name,
-        'neighborhood': neighborhood,
-        'county': county,
-        'zip': _zip,
-        'latitude': lat,
-        'longitude': lng,
-        'BIN': BIN,
-        'record_url': record_url,
-        'block': block,
-        'lot': lot,
-        'community_board': community_board,
-        'buildings_on_lot': buildings_on_lot,
-        'health_area': health_area,
-        'census_tract': census_tract,
-        'city_owned': city_owned,
-        'record_url': record_url,
-        'tidal_wetlands': tidal_wetlands,
-        'freshwater_wetlands': freshwater_wetlands,
-        'coastal_erosion': coastal_erosion,
-        'special_flood_hazard': special_flood_hazard,
-        'any_flood_risk': any_flood_risk,
-        'tax_building_type': tax_building_type,
-        'owner': owner,
-        'land_area_sqft': land_area_sqft,
-        'land_area_acres': land_area_acres,
-        'estimated_market_value': estimated_market_value,
-        'recent_tax': recent_tax,
-        'zip_pop': zip_pop
-        }
-
-    #save as a big lovely dataframe
-    df = pd.DataFrame([address_dict])
-
     #print update
     progress_bar.progress(100)
     status_text.text('')
 
     #print out results
-    st.write(f"**Full address**: {address_dict['address']}")
-    st.write(f"**Owner**: {address_dict['owner']}")
-    st.write(f"**Estimated market value**: ${address_dict['estimated_market_value']}")
-    st.write(f"**Tax code**: {address_dict['tax_building_type']}")
-    st.write(f"**Land area (acres)**: {address_dict['land_area_acres']}")
-    st.write(f"**Any flood risk**: {address_dict['any_flood_risk']}")
-    st.write(f"**Coordinates**: {address_dict['longitude']}, {address_dict['latitude']}")
-    st.write(f"**Building record**: [Click here for details]({address_dict['record_url']})")
-    st.write(f"**Recent tax record**: [Click here for details]({address_dict['recent_tax']})")
-    st.write(f"**Zip code population**: {address_dict['zip_pop']}")
-    #st.write(f"**Zip code broadband adoption**: {address_dict['zip_internet']}%")
+    st.write(f"**Full address**: {address}")
+    st.write(f"**Owner**: {owner}")
+    st.write(f"**Estimated market value**: ${estimated_market_value}")
+    st.write(f"**Tax code**: {tax_building_type}")
+    st.write(f"**Land area (acres)**: {land_area_acres}")
+    st.write(f"**Any flood risk**: {any_flood_risk}")
+    st.write(f"**Coordinates**: {longitude}, {latitude}")
+    st.write(f"**Building record**: [Click here for details]({record_url})")
+    st.write(f"**Recent tax record**: [Click here for details]({recent_tax})")
+    st.write(f"**Zip code population**: {zip_pop}")
 
     ###
     ### Put it on a map
