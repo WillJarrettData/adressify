@@ -156,7 +156,7 @@ if pressed:
 
     try:
         element = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.ID, "housenumber"))
+            EC.element_to_be_clickable((By.ID, "housenumber"))
         )
     except:
         pass
