@@ -241,12 +241,9 @@ if pressed:
     status_text.text('Bringing everything together...')
 
     #waiting for page to load
-    try:
-        element = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
-            )
-    except:
-        pass
+    element = WebDriverWait(driver, 15).until(
+    EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
+        )
 
     #grabbing fun financial data
     owner = driver.find_elements_by_class_name("DataletData")[3].text
@@ -258,12 +255,9 @@ if pressed:
     button.click()
 
     #waiting for page to load
-    try:
-        element = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
-            )
-    except:
-        pass
+    element = WebDriverWait(driver, 15).until(
+    EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
+        )
     
     #grab url
     recent_tax = driver.find_element_by_xpath("/html/body/div/div[3]/section/div/form/div[3]/div/div/table/tbody/tr/td/table/tbody/tr[2]/td/div/div/table[2]/tbody/tr[2]/td[3]/a").get_attribute('href')
