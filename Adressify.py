@@ -284,7 +284,7 @@ if pressed:
     st.write(f"**Tax code**: {tax_building_type}")
     st.write(f"**Land area (acres)**: {land_area_acres}")
     st.write(f"**Any flood risk**: {any_flood_risk}")
-    st.write(f"**Coordinates**: {longitude}, {latitude}")
+    st.write(f"**Coordinates**: {latitude}, {longitude}")
     st.write(f"**Building record**: [Click here for details]({record_url})")
     st.write(f"**Recent tax record**: [Click here for details]({recent_tax})")
     st.write(f"**Zip code population**: {zip_pop}")
