@@ -269,24 +269,24 @@ if pressed:
     ###
 
     #set url
-    #url = 'https://data.cityofnewyork.us/resource/pri4-ifjk.json'
-    #r = requests.get(url)
-    #result_dic = r.json()
-    #
-    #for zipcode in result_dic:
-    #    if zipcode['modzcta'] == _zip:
-    #        zip_pop = zipcode['pop_est']
-    #zip_pop = "{:,}".format(int(zip_pop))
-
-    #set url
-    url = 'https://data.cityofnewyork.us/resource/qz5f-yx82.json'
+    url = 'https://data.cityofnewyork.us/resource/pri4-ifjk.json'
     r = requests.get(url)
     result_dic = r.json()
-
+    
     for zipcode in result_dic:
-        if zipcode['zip_code'] == _zip:
-            zip_internet = round(float(zipcode['home_broadband_adoption'])*100,1)
-    zip_internet = str(zip_internet)
+        if zipcode['modzcta'] == _zip:
+            zip_pop = zipcode['pop_est']
+    zip_pop = "{:,}".format(int(zip_pop))
+
+    #set url
+    #url = 'https://data.cityofnewyork.us/resource/qz5f-yx82.json'
+    #r = requests.get(url)
+    #result_dic = r.json()
+
+    #for zipcode in result_dic:
+    #    if zipcode['zip_code'] == _zip:
+    #        zip_internet = round(float(zipcode['home_broadband_adoption'])*100,1)
+    #zip_internet = str(zip_internet)
 
     ###
     ### Collate and print everything useful
