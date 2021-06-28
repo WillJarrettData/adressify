@@ -297,5 +297,5 @@ if pressed:
     ### Put it on a map
     ###
 
-    dfMap = df[["latitude", "longitude"]]
+    dfMap = pd.DataFrame(latitude, longitude)
     st.map(dfMap, zoom=11)
