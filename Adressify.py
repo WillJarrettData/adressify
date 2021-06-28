@@ -269,14 +269,14 @@ if pressed:
     ###
 
     #set url
-    url = 'https://data.cityofnewyork.us/resource/pri4-ifjk.json'
-    r = requests.get(url)
-    result_dic = r.json()
-
-    for zipcode in result_dic:
-        if zipcode['modzcta'] == _zip:
-            zip_pop = zipcode['pop_est']
-    zip_pop = "{:,}".format(int(zip_pop))
+    #url = 'https://data.cityofnewyork.us/resource/pri4-ifjk.json'
+    #r = requests.get(url)
+    #result_dic = r.json()
+    #
+    #for zipcode in result_dic:
+    #    if zipcode['modzcta'] == _zip:
+    #        zip_pop = zipcode['pop_est']
+    #zip_pop = "{:,}".format(int(zip_pop))
 
     #set url
     url = 'https://data.cityofnewyork.us/resource/qz5f-yx82.json'
@@ -332,8 +332,7 @@ if pressed:
         'land_area_acres': land_area_acres,
         'estimated_market_value': estimated_market_value,
         'recent_tax': recent_tax,
-        'zip_pop': zip_pop,
-        'zip_internet': zip_internet
+        'zip_pop': zip_pop
         }
 
     #save as a big lovely dataframe
@@ -353,6 +352,8 @@ if pressed:
     st.write(f"**Coordinates**: {address_dict['longitude']}, {address_dict['latitude']}")
     st.write(f"**Building record**: [Click here for details]({address_dict['record_url']})")
     st.write(f"**Recent tax record**: [Click here for details]({address_dict['recent_tax']})")
+    st.write(f"**Zip code population**: {address_dict['zip_pop']}")
+    #st.write(f"**Zip code broadband adoption**: {address_dict['zip_internet']}%")
 
     ###
     ### Put it on a map
@@ -360,13 +361,6 @@ if pressed:
 
     dfMap = df[["latitude", "longitude"]]
     st.map(dfMap, zoom=11)
-
-    ###
-    ### Print zipcode details
-    ###
-
-    st.write(f"**Zip code population**: {address_dict['zip_pop']}")
-    st.write(f"**Zip code broadband adoption**: {address_dict['zip_internet']}%")
 
 #    except:
 #        #error message to display if anything above breaks
