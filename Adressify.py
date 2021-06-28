@@ -71,10 +71,6 @@ if pressed:
     r = requests.get(url,params=keys)
     result_dic = r.json()
 
-    ###
-    ### Put results into a nice tidy dictionary
-    ###
-
     #define full address
     address = result_dic['results'][0]['formatted_address']
     #define street number
@@ -297,5 +293,5 @@ if pressed:
     ### Put it on a map
     ###
 
-    dfMap = pd.DataFrame(latitude, longitude)
+    dfMap = pd.DataFrame({'latitude':latitude, 'longitude':longitude})
     st.map(dfMap, zoom=11)
