@@ -125,11 +125,11 @@ if pressed:
     driver.get(url)
     
     #wait until the page loads
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 15).until(
         EC.invisibility_of_element_located((By.ID, "veil"))
     )
 
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 50).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
     )
 
@@ -147,7 +147,7 @@ if pressed:
     button.click()
 
     #wait until page loads
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
         )
 
@@ -223,7 +223,7 @@ if pressed:
     status_text.text('Bringing everything together...')
 
     #waiting for page to load
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 15).until(
     EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
         )
 
@@ -237,7 +237,7 @@ if pressed:
     button.click()
 
     #waiting for page to load
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 15).until(
     EC.presence_of_element_located((By.XPATH, "/html/body/div/div[3]/div/nav/div/div/li[12]"))
         )
     
