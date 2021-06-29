@@ -107,10 +107,6 @@ if pressed:
     ### Grab building records with Selenium 
     ###
 
-    #print update
-    progress_bar.progress(35)
-    status_text.text('Grabbing building records...')
-
     #set driver options (to hide the new chrome tab)
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -127,6 +123,10 @@ if pressed:
     #send driver to building records website 
     url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
     driver.get(url)
+
+    #print update
+    progress_bar.progress(35)
+    status_text.text('Loading building records...')
     
     #wait until the page loads
     WebDriverWait(driver, 15).until(
@@ -136,6 +136,10 @@ if pressed:
     WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
     )
+
+    #print update
+    progress_bar.progress(40)
+    status_text.text('Grabbing building records...')
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
