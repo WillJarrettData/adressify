@@ -114,6 +114,7 @@ if pressed:
     #set driver options (to hide the new chrome tab)
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
+    options.add_argument("window-size=1920,1080")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -129,12 +130,12 @@ if pressed:
         EC.invisibility_of_element_located((By.ID, "veil"))
     )
 
-    element = WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
     )
 
     #input street number
-    street_number_input = element.find_element_by_id('housenumber')
+    street_number_input = driver.find_element_by_id('housenumber')
     street_number_input.send_keys(street_number)
     #input street name
     street_name_input = driver.find_element_by_id('streetnumber')
