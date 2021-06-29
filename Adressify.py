@@ -124,12 +124,14 @@ if pressed:
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
     #print update
     progress_bar.progress(35)
-    status_text.text(f'Loading building records... 1')
     #send driver to building records website 
     url = "https://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
-    status_text.text(f'Loading building records... 2')
     driver.get(url)
-    status_text.text(f'Loading building records... 3')
+
+    #waiting for page to load
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.ID, "boro1"))
+    )
 
     #print update
     progress_bar.progress(40)
