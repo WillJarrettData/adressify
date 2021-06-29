@@ -125,6 +125,7 @@ if pressed:
         #print update
         progress_bar.progress(35)
         status_text.text(f'Loading building records (attempt {count + 1})...')
+        time.sleep(5)
         #launch driver
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
         #send driver to building records website 
@@ -135,12 +136,6 @@ if pressed:
         WebDriverWait(driver, 3).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
-        try:
-            WebDriverWait(driver, 5).until(
-                EC.element_to_be_clickable((By.ID, "housenumber"))
-            )
-        except:
-            pass
 
         #if page didn't load properly, close Selenium and try again
         try:
