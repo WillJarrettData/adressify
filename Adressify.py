@@ -130,13 +130,18 @@ if pressed:
         #send driver to building records website 
         url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
         driver.get(url)
+        
         #wait until the page loads
         WebDriverWait(driver, 3).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
-        WebDriverWait(driver, 3).until(
-            EC.element_to_be_clickable((By.ID, "housenumber"))
-        )
+        try:
+            WebDriverWait(driver, 3).until(
+                EC.element_to_be_clickable((By.ID, "housenumber"))
+            )
+        except:
+            pass
+
         try:
             street_number_input = driver.find_element_by_id('housenumber')
             is_page_loaded = True
