@@ -125,7 +125,7 @@ if pressed:
     #print update
     progress_bar.progress(35)
     #send driver to building records website 
-    url = "https://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
+    url = "http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
     driver.get(url)
 
     #waiting for page to load
