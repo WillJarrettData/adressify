@@ -114,10 +114,12 @@ if pressed:
     #set driver options (to hide the new chrome tab)
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
-    options.add_argument("window-size=1920,1080")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+
+    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+    options.add_argument(f'user-agent={user_agent}')
 
     #launch driver
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
