@@ -116,18 +116,20 @@ if pressed:
     options.add_argument("window-size=1400,900")
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
-    options.add_argument(f'user-agent={user_agent}')
-
     #print update
     progress_bar.progress(35)
     status_text.text(f'Loading building records...')
 
     #launch driver
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+    #print update
+    progress_bar.progress(35)
+    status_text.text(f'Loading building records... 1')
     #send driver to building records website 
-    url = "http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
+    url = "https://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
+    status_text.text(f'Loading building records... 2')
     driver.get(url)
+    status_text.text(f'Loading building records... 3')
 
     #print update
     progress_bar.progress(40)
