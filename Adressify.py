@@ -124,7 +124,7 @@ if pressed:
     while is_page_loaded == False:
         #print update
         progress_bar.progress(35)
-        status_text.text('Booting Selenium {count}...')
+        status_text.text(f'Booting Selenium {count}...')
         #launch driver
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
         #send driver to building records website 
