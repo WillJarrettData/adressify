@@ -134,7 +134,9 @@ if pressed:
         WebDriverWait(driver, 3).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
-
+        WebDriverWait(driver, 3).until(
+            EC.element_to_be_clickable((By.ID, "housenumber"))
+        )
         try:
             street_number_input = driver.find_element_by_id('housenumber')
             is_page_loaded = True
@@ -144,7 +146,6 @@ if pressed:
 #    #print update
 #    progress_bar.progress(35)
 #    status_text.text('Loading building records...')
-
 
     WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
