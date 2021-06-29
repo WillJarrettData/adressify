@@ -129,9 +129,9 @@ if pressed:
         EC.invisibility_of_element_located((By.ID, "veil"))
     )
 
-    WebDriverWait(driver, 50).until(
-        EC.element_to_be_clickable((By.ID, "housenumber"))
-    )
+#    WebDriverWait(driver, 50).until(
+#        EC.element_to_be_clickable((By.ID, "housenumber"))
+#    )
 
     #input street number
     street_number_input = driver.find_element_by_id('housenumber')
