@@ -141,11 +141,12 @@ if pressed:
             street_number_input = driver.find_element_by_id('housenumber')
             is_page_loaded = True
         except:
+            driver.quit()
             count += 1
     
-#    #print update
-#    progress_bar.progress(35)
-#    status_text.text('Loading building records...')
+    #print update
+    progress_bar.progress(35)
+    status_text.text('Loading building records...')
 
     WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
