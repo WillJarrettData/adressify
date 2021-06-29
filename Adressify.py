@@ -128,11 +128,6 @@ if pressed:
     url = "http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
     driver.get(url)
 
-    #waiting for page to load
-    WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.ID, "boro1"))
-    )
-
     #print update
     progress_bar.progress(40)
     status_text.text('Grabbing building records...')
@@ -165,7 +160,7 @@ if pressed:
     else:
         flood = "Yes"
     tax_building_type = driver.find_element_by_xpath("/html/body/center/table[7]/tbody/tr[5]/td[2]").text
-    
+
     driver.quit()
 
     ###
