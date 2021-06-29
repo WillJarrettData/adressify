@@ -124,45 +124,37 @@ if pressed:
     while is_page_loaded == False:
         #print update
         progress_bar.progress(35)
-        status_text.text(f'Booting Selenium {count}...')
+        status_text.text(f'Loading building records (attempt {count + 1})...')
         #launch driver
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
         #send driver to building records website 
         url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
         driver.get(url)
-        
+
         #wait until the page loads
         WebDriverWait(driver, 3).until(
             EC.invisibility_of_element_located((By.ID, "veil"))
         )
         try:
-            WebDriverWait(driver, 3).until(
+            WebDriverWait(driver, 5).until(
                 EC.element_to_be_clickable((By.ID, "housenumber"))
             )
         except:
             pass
 
+        #if page didn't load properly, close Selenium and try again
         try:
             street_number_input = driver.find_element_by_id('housenumber')
             is_page_loaded = True
         except:
             driver.quit()
             count += 1
-    
-    #print update
-    progress_bar.progress(35)
-    status_text.text('Loading building records...')
-
-    WebDriverWait(driver, 30).until(
-        EC.element_to_be_clickable((By.ID, "housenumber"))
-    )
 
     #print update
     progress_bar.progress(40)
     status_text.text('Grabbing building records...')
 
     #input street number
-    street_number_input = driver.find_element_by_id('housenumber')
     street_number_input.send_keys(street_number)
     #input street name
     street_name_input = driver.find_element_by_id('streetnumber')
