@@ -133,7 +133,7 @@ if pressed:
         EC.invisibility_of_element_located((By.ID, "veil"))
     )
 
-    WebDriverWait(driver, 50).until(
+    WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
     )
 
