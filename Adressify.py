@@ -118,71 +118,54 @@ if pressed:
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
     options.add_argument(f'user-agent={user_agent}')
 
-    count = 0
-    is_page_loaded = False
+    #print update
+    progress_bar.progress(35)
+    status_text.text(f'Loading building records...')
 
-    while is_page_loaded == False:
-        #print update
-        progress_bar.progress(35)
-        status_text.text(f'Loading building records (attempt {count + 1})...')
-        time.sleep(5)
-        #launch driver
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
-        #send driver to building records website 
-        url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
-        driver.get(url)
+    #launch driver
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+    #send driver to building records website 
+    url = "http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp"
+    driver.get(url)
 
-        #wait until the page loads
-        WebDriverWait(driver, 3).until(
-            EC.invisibility_of_element_located((By.ID, "veil"))
-        )
-
-        #if page didn't load properly, close Selenium and try again
-        try:
-            street_number_input = driver.find_element_by_id('housenumber')
-            is_page_loaded = True
-        except:
-            driver.quit()
-            count += 1
+    #waiting for page to load
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.ID, "boro1"))
+    )
 
     #print update
     progress_bar.progress(40)
     status_text.text('Grabbing building records...')
 
+    #input borough
+    select = Select(driver.find_element_by_id('boro1'))
+    select.select_by_visible_text(county)
     #input street number
+    street_number_input = driver.find_element_by_name('houseno')
     street_number_input.send_keys(street_number)
     #input street name
-    street_name_input = driver.find_element_by_id('streetnumber')
+    street_name_input = driver.find_element_by_name('street')
     street_name_input.send_keys(street_name)
-    #input borough
-    select = Select(driver.find_element_by_id('sel1'))
-    select.select_by_visible_text(county)
     #click search
-    button = driver.find_elements_by_xpath("/html/body/div[1]/div[1]/div[2]/div[4]/div[4]/div[2]/div[2]/div[2]/div[1]/uib-accordion/div/div[1]/div[2]/div/div/div[4]/button")[0]
+    button = driver.find_element_by_xpath("/html/body/div/table[2]/tbody/tr[3]/td/table/tbody/tr/td[5]/input")
     button.click()
 
-    #wait until page loads
+    #waiting for page to load
     WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div[2]/div[4]/div[2]/div[1]/span[3]"))
-        )
+        EC.presence_of_element_located((By.XPATH, "/html/body/center/table[2]/tbody/tr[2]/td[2]"))
+    )
 
     #grab results
-    BIN = driver.find_elements_by_class_name("pad-15")[2].text.replace('BIN# ','')
+    BIN = driver.find_elements_by_class_name("maininfo")[2].text.replace('BIN# ','').strip()
     record_url = f"http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?bin={BIN}"
-    block = driver.find_elements_by_class_name('form-group')[3].text.replace('Tax Block\n','')
-    lot = driver.find_elements_by_class_name('form-group')[4].text.replace('Tax Lot\n','')
-    community_board = driver.find_elements_by_class_name('form-group')[5].text.replace('Community Board\n','')
-    buildings_on_lot = driver.find_elements_by_class_name('form-group')[7].text.replace('Buildings on Lot\n','')
-    health_area = driver.find_elements_by_class_name('form-group')[9].text.replace('Health Area\n','')
-    census_tract = driver.find_elements_by_class_name('form-group')[10].text.replace('Census Tract\n','')
-    city_owned = driver.find_elements_by_class_name('form-group')[22].text.replace('City Owned\n','')
-    tidal_wetlands = driver.find_elements_by_class_name('col-xs-4')[1].text
-    freshwater_wetlands = driver.find_elements_by_class_name('col-xs-4')[2].text
-    coastal_erosion = driver.find_elements_by_class_name('col-xs-4')[3].text
-    special_flood_hazard = driver.find_elements_by_class_name('col-xs-4')[4].text
-    tax_building_type = driver.find_elements_by_class_name('col-xs-4')[5].text
-
-    driver.quit()
+    block = driver.find_elements_by_class_name("content")[5].text.replace(": ", "").strip()
+    lot = driver.find_elements_by_class_name("content")[11].text.replace(": ", "").strip()
+    if driver.find_element_by_xpath("/html/body/center/table[7]/tbody/tr[3]/td/b").text == "This property is not located in an area that may be affected by Tidal Wetlands, Freshwater Wetlands, Coastal Erosion Hazard Area, or Special Flood Hazard Area.":
+        flood = "No"
+    else:
+        flood = "Yes"
+    tax_building_type = driver.find_element_by_xpath("/html/body/center/table[7]/tbody/tr[5]/td[2]").text
+        driver.quit()
 
     ###
     ### Grab financial records with Selenium
@@ -278,12 +261,6 @@ if pressed:
     ###
     ### Print everything useful
     ###
-
-    #define 'any_flood_risk' variable
-    if tidal_wetlands == "No" and freshwater_wetlands == "No" and coastal_erosion == "No" and special_flood_hazard == "No":
-        any_flood_risk = "No"
-    else:
-        any_flood_risk = "Yes"
     
     #convert square feet into acres
     land_area_acres = round(int(land_area_sqft) / 43560, 3)
@@ -298,7 +275,7 @@ if pressed:
     st.write(f"**Estimated market value**: ${estimated_market_value}")
     st.write(f"**Tax code**: {tax_building_type}")
     st.write(f"**Land area (acres)**: {land_area_acres}")
-    st.write(f"**Any flood risk**: {any_flood_risk}")
+    st.write(f"**Any flood risk**: {flood}")
     st.write(f"**Coordinates**: {latitude}, {longitude}")
     st.write(f"**Building record**: [Click here for details]({record_url})")
     st.write(f"**Recent tax record**: [Click here for details]({recent_tax})")
