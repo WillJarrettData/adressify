@@ -165,7 +165,8 @@ if pressed:
     else:
         flood = "Yes"
     tax_building_type = driver.find_element_by_xpath("/html/body/center/table[7]/tbody/tr[5]/td[2]").text
-        driver.quit()
+    
+    driver.quit()
 
     ###
     ### Grab financial records with Selenium
