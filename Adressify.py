@@ -118,20 +118,33 @@ if pressed:
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
     options.add_argument(f'user-agent={user_agent}')
 
-    #launch driver
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
-    #send driver to building records website 
-    url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
-    driver.get(url)
+    count = 0
+    is_page_loaded = False
 
-    #print update
-    progress_bar.progress(35)
-    status_text.text('Loading building records...')
+    while is_page_loaded == False:
+        #print update
+        progress_bar.progress(35)
+        status_text.text('Booting Selenium {count}...')
+        #launch driver
+        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+        #send driver to building records website 
+        url = "https://a810-dobnow.nyc.gov/publish/Index.html#!/"
+        driver.get(url)
+        #wait until the page loads
+        WebDriverWait(driver, 3).until(
+            EC.invisibility_of_element_located((By.ID, "veil"))
+        )
+
+        try:
+            street_number_input = driver.find_element_by_id('housenumber')
+            is_page_loaded = True
+        except:
+            count += 1
     
-    #wait until the page loads
-    WebDriverWait(driver, 15).until(
-        EC.invisibility_of_element_located((By.ID, "veil"))
-    )
+#    #print update
+#    progress_bar.progress(35)
+#    status_text.text('Loading building records...')
+
 
     WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "housenumber"))
