@@ -296,6 +296,6 @@ if pressed:
 
         st.write("Hmm, that didn't work. Here are a few ideas to get things rolling:")
         st.write("* Double check you are using an NYC address.")
-        st.write("* Try a different way of writing the address (e.g. 'Columbia University Morningside' instead of 'Columbia University). The Google API is sometimes a bit picky.")
+        st.write("* Try a different way of writing the address (e.g. 'Columbia University Morningside' instead of 'Columbia University'). The Google API is sometimes a bit picky.")
         st.write("* If Heroku or any of NYC's record websites are playing up, you might need to come back later.")
         st.write(f"* If you are getting persistent errors, please send me a [message](https://willjarrettdata.com/contact/) and I'll try to fix it.")
