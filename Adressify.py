@@ -292,7 +292,7 @@ if pressed:
     except:
         #print update
         progress_bar.progress(0)
-        status_text
+        status_text.text('')
 
         st.write("Hmm, that didn't work. Here are a few ideas to get things rolling:")
         st.write("* Double check you are using an NYC address.")
